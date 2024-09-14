@@ -4,9 +4,8 @@ pipeline {
     stages {
         stage('Run unit tests') {
             steps {
-                    sh 'pip install -r requirements.txt'
-                    sh 'pytest'
-                }
+                sh 'pip install -r requirements.txt'
+                sh 'pytest'
             }
         }
         stage('Build docker image') {
