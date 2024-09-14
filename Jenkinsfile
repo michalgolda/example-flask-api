@@ -2,14 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Run unit tests') {
             steps {
-                echo 'Building..'
+                withPythonEnv('python3.12') {
+                    sh 'pip install -r requirements.txt'
+                    sh 'pytest'
+                }
             }
         }
-        stage('Test') {
+        stage('Build docker image') {
             steps {
-                echo 'Testing..'
+                sh 'docker build -t localhost:5000/example-flask-api .'
+            }
+        }
+        stage("Push docker image to registry") {
+            steps {
+                sh "docker push localhost:5000/example-flask-api"
             }
         }
         stage('Deploy') {
