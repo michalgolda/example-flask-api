@@ -1,0 +1,6 @@
+tests/
+Jenkinsfile
+compose.yaml
+.venv/
+.pytest_cache/
+__pycache__/
