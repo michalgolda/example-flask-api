@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Run unit tests') {
             steps {
-                withPythonEnv('python3.12') {
                     sh 'pip install -r requirements.txt'
                     sh 'pytest'
                 }
