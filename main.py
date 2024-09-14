@@ -1,11 +1,14 @@
 from flask import Flask
+from services.greeting import GreetingService
 
 
 app = Flask("example-flask-api")
 
-@app.route("/hello")
-def hello_world():
-    return {"msg": "Hello, World!"}
+@app.route("/greeting/<name>", methods=["GET"])
+def greeting():
+    service = GreetingService()
+    service_output = service.execute(name)
+    return service_output
 
 
 if __name__ == "__main__":
